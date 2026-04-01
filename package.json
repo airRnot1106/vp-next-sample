@@ -26,8 +26,14 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.1",
     "eslint-plugin-command": "^3.5.2",
+    "msw": "^2.12.14",
     "oxfmt": "^0.42.0",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@10.32.1",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }
