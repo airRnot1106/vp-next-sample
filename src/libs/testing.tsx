@@ -32,24 +32,28 @@ function isElement(prop: unknown): prop is JSX.Element {
  *
  **/
 export function getProps<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // oxlint-disable-next-line @typescript-eslint/no-explicit-any
   T extends keyof JSX.IntrinsicElements | JSXElementConstructor<any>,
 >(
   element: JSX.Element,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  // oxlint-disable-next-line @typescript-eslint/no-unsafe-function-type
   componentType: Function | string,
 ): ComponentProps<T> | undefined {
   if (element.type === componentType) {
+    // oxlint-disable-next-line typescript/no-unsafe-return
     return element.props;
   }
+  // oxlint-disable-next-line typescript/no-unsafe-argument
   const foundProps = Object.values(element.props).reduce((acc: object[], prop) => {
     if (!isElement(prop)) return acc;
+    // oxlint-disable-next-line typescript/no-unsafe-assignment
     const hit = getProps(prop, componentType);
     if (!hit) return acc;
+    // oxlint-disable-next-line typescript/no-unsafe-return
     return [...acc, hit];
   }, []);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return foundProps[0] as any;
+  // oxlint-disable-next-line typescript/no-unsafe-return
+  return foundProps[0];
 }
 
 if (import.meta.vitest) {
@@ -94,6 +98,7 @@ if (import.meta.vitest) {
   describe('getProps', () => {
     it('コンポーネントの型が直接一致する場合にpropsを返す', () => {
       const element = <TestChild message="hello" />;
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, TestChild);
 
       expect(props).toEqual({ message: 'hello' });
@@ -101,6 +106,7 @@ if (import.meta.vitest) {
 
     it('タグ名によってHTML要素のpropsを返す', () => {
       const element = <div className="test-class" id="test-id" />;
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, 'div');
 
       expect(props).toEqual({ id: 'test-id', className: 'test-class' });
@@ -112,6 +118,7 @@ if (import.meta.vitest) {
           <TestChild message="nested" />
         </TestParent>
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, TestChild);
 
       expect(props).toEqual({ message: 'nested' });
@@ -128,6 +135,7 @@ if (import.meta.vitest) {
           id="outer"
         />
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, TestChild);
 
       expect(props).toEqual({ message: 'deep' });
@@ -139,6 +147,7 @@ if (import.meta.vitest) {
           <span id="child">content</span>
         </div>
       );
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, 'span');
 
       expect(props).toEqual({ id: 'child', children: 'content' });
@@ -146,6 +155,7 @@ if (import.meta.vitest) {
 
     it('コンポーネントが見つからない場合にundefinedを返す', () => {
       const element = <TestParent>{<div />}</TestParent>;
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const props = getProps(element, TestChild);
 
       expect(props).toBeUndefined();
