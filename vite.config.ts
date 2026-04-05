@@ -4,6 +4,7 @@ export default defineConfig({
   staged: {
     '*': 'vp check --fix',
     '*.{html,jsx,tsx}': 'markuplint "src/**/*.{html,jsx,tsx}" --fix --problem-only',
+    '.github/workflows/**/*.{yml,yaml}': ['pinact run -u --min-age 7', 'ghalint run', 'actionlint'],
   },
   fmt: {
     semi: true,

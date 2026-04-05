@@ -37,8 +37,11 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
+              actionlint
+              ghalint
               gitleaks
               nix-vite-plus.packages.${system}.vp
+              pinact
             ];
           };
         }
