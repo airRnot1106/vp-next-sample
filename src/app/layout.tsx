@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 import { MswProvider } from '../libs/msw/msw-provider';
@@ -27,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
-        <MswProvider>{children}</MswProvider>
+        <MswProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </MswProvider>
       </body>
     </html>
   );
