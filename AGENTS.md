@@ -94,3 +94,7 @@ For GitHub Actions, consider using [`voidzero-dev/setup-vp`](https://github.com/
 - [ ] Run `vp install` after pulling remote changes and before getting started.
 - [ ] Run `vp check` and `vp test` to validate changes.
 <!--VITE PLUS END-->
+
+## Review Checklist for Agents
+
+After completing a React/Next.js implementation task, invoke the `/react-doctor` skill to review for issues before considering the task done.

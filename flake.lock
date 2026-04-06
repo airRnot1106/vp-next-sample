@@ -1,5 +1,63 @@
 {
   "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774607140,
+        "narHash": "sha256-0P89BLGEzRUumWKSOEayi+Dal6mIlVumlBgcyk5Qo6s=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "e29bef0e9e56c4cc683cead15a6eda1d6fb1074e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
+    "anthropic-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774451446,
+        "narHash": "sha256-w//9LB1OVG9jlllY+VDse7Js0dn5x6Ys2vPuQACKsTM=",
+        "owner": "anthropics",
+        "repo": "skills",
+        "rev": "98669c11ca63e9c81c11501e1437e5c47b556621",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "agent-skills",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773608492,
+        "narHash": "sha256-QZteyExJYSQzgxqdsesDPbQgjctGG7iKV/6ooyQPITk=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "9a40ec3b78fc688d0908485887d355caa5666d18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nix-vite-plus": {
       "inputs": {
         "nixpkgs": [
@@ -36,12 +94,32 @@
         "type": "github"
       }
     },
+    "react-doctor": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774862098,
+        "narHash": "sha256-5kR5hST6NhIJeBpdAEruT6qLUp+1ieuOlrldGfun0uc=",
+        "owner": "millionco",
+        "repo": "react-doctor",
+        "rev": "720f42192bf50ba24b25368063221ee3e33ac23c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "millionco",
+        "repo": "react-doctor",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
+        "anthropic-skills": "anthropic-skills",
         "nix-vite-plus": "nix-vite-plus",
         "nixpkgs": "nixpkgs",
+        "react-doctor": "react-doctor",
         "systems": "systems",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix",
+        "vercel-skills": "vercel-skills"
       }
     },
     "systems": {
@@ -76,6 +154,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vercel-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775165248,
+        "narHash": "sha256-1l6cthflz36+ihVQJ5PVl2GysLl1NBiKNNl8LUg+U28=",
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
+        "rev": "73140fc5b3a214ad3222bcf557b397b3c02d11c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-skills",
         "type": "github"
       }
     }
