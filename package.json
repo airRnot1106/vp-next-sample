@@ -61,7 +61,7 @@
     "eslint-plugin-security": "^4.0.0",
     "eslint-plugin-storybook": "^10.3.4",
     "markuplint": "^4.14.1",
-    "msw": "^2.12.14",
+    "msw": "^2.13.0",
     "playwright": "^1.59.1",
     "storybook": "^10.3.4",
     "typescript": "^5",
