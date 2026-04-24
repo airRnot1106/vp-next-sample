@@ -21,6 +21,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "eslint-plugin-command": "^3.5.2",
     "typescript": "^5",
     "vite-plus": "catalog:"
   },

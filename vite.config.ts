@@ -4,6 +4,7 @@ export default defineConfig({
   staged: {
     '*': 'vp check --fix',
   },
+  // @keep-sorted
   fmt: {
     semi: true,
     singleQuote: true,
