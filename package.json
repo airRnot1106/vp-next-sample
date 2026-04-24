@@ -22,8 +22,14 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "eslint-plugin-command": "^3.5.2",
+    "msw": "^2.13.5",
     "typescript": "^5",
     "vite-plus": "catalog:"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.2",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }
