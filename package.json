@@ -23,8 +23,10 @@
     "eslint-config-next": "16.2.4",
     "eslint-plugin-command": "^3.5.2",
     "msw": "^2.13.5",
+    "playwright": "^1.59.1",
     "typescript": "^5",
-    "vite-plus": "catalog:"
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.33.2",
   "msw": {

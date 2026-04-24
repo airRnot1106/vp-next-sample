@@ -12,7 +12,7 @@ catalogs:
 
 overrides:
   vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vitest: npm:@voidzero-dev/vite-plus-test@^0.1.19
 
 importers:
 
@@ -55,12 +55,18 @@ importers:
       msw:
         specifier: ^2.13.5
         version: 2.13.5(@types/node@20.19.39)(typescript@5.9.3)
+      playwright:
+        specifier: ^1.59.1
+        version: 1.59.1
       typescript:
         specifier: ^5
         version: 5.9.3
       vite-plus:
         specifier: 'catalog:'
         version: 0.1.19(@types/node@20.19.39)(typescript@5.9.3)(vite@8.0.10(@types/node@20.19.39))
+      vitest:
+        specifier: npm:@voidzero-dev/vite-plus-test@^0.1.19
+        version: '@voidzero-dev/vite-plus-test@0.1.19(@types/node@20.19.39)(typescript@5.9.3)(vite@8.0.10(@types/node@20.19.39))'
 
 packages:
 
@@ -1716,6 +1722,11 @@ packages:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2290,6 +2301,16 @@ packages:
 
   pixelmatch@7.1.0:
     resolution: {integrity: sha512-1wrVzJ2STrpmONHKBy228LM1b84msXDUoAzVEl0R8Mz4Ce6EPr+IVtxm8+yvrqLYMHswREkjYFaMxnyGnaY3Ng==}
+    hasBin: true
+
+  playwright-core@1.59.1:
+    resolution: {integrity: sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.59.1:
+    resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
+    engines: {node: '>=18'}
     hasBin: true
 
   pngjs@7.0.0:
@@ -4265,6 +4286,9 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -4858,6 +4882,14 @@ snapshots:
   pixelmatch@7.1.0:
     dependencies:
       pngjs: 7.0.0
+
+  playwright-core@1.59.1: {}
+
+  playwright@1.59.1:
+    dependencies:
+      playwright-core: 1.59.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   pngjs@7.0.0: {}
 

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite-plus';
+import { playwright } from 'vite-plus/test/browser-playwright';
 
 export default defineConfig({
   staged: {
@@ -29,4 +30,16 @@ export default defineConfig({
     trailingComma: 'all',
   },
   lint: { options: { typeAware: true, typeCheck: true } },
+  test: {
+    name: 'browser',
+    browser: {
+      enabled: true,
+      provider: playwright(),
+      headless: true,
+      // https://vitest.dev/config/browser/playwright
+      instances: [{ browser: 'chromium' }],
+    },
+    include: ['src/**/*.test.{ts,tsx}'],
+    includeSource: ['src/**/*.{ts,tsx}'],
+  },
 });
