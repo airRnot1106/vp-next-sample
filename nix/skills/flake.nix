@@ -50,6 +50,9 @@
 
           agentLib = agent-skills.lib.agent-skills;
           sources = {
+            _project = {
+              path = ../../skills;
+            };
             anthropic = {
               path = anthropic-skills;
               subdir = "skills";
@@ -72,6 +75,7 @@
             enable = [
               "composition-patterns"
               "frontend-design"
+              "next-bundle-analyzer"
               "playwright-cli"
               "playwright-test"
               "react-best-practices"
