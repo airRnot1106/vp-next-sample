@@ -60,6 +60,22 @@
         "type": "github"
       }
     },
+    "mizchi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777217457,
+        "narHash": "sha256-swhJpPNOltOl+YcqeoTNBVPCgsc95iqgTkhVw2BjU5c=",
+        "owner": "mizchi",
+        "repo": "skills",
+        "rev": "a0ebf680f62836f64d7e9b741ee212f55b108f88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mizchi",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1776548001,
@@ -124,6 +140,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "anthropic-skills": "anthropic-skills",
+        "mizchi": "mizchi",
         "nixpkgs": [
           "nixpkgs"
         ],

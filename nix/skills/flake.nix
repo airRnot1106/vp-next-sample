@@ -8,6 +8,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    mizchi = {
+      url = "github:mizchi/skills";
+      flake = false;
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     react-doctor = {
       url = "github:millionco/react-doctor";
@@ -23,6 +27,7 @@
     {
       agent-skills,
       anthropic-skills,
+      mizchi,
       nixpkgs,
       react-doctor,
       vercel-skills,
@@ -49,6 +54,9 @@
               path = anthropic-skills;
               subdir = "skills";
             };
+            mizchi = {
+              path = mizchi;
+            };
             react-doctor = {
               path = react-doctor;
               subdir = "skills";
@@ -64,6 +72,8 @@
             enable = [
               "composition-patterns"
               "frontend-design"
+              "playwright-cli"
+              "playwright-test"
               "react-best-practices"
               "react-doctor"
               "react-view-transitions"
