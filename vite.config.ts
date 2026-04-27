@@ -12,6 +12,7 @@ export default defineConfig({
   staged: {
     '*': 'vp check --fix',
     '*.{html,jsx,tsx}': 'vp run lint:markup',
+    '.github/workflows/*.{yml,yaml}': ['pinact run -u --min-age 7', 'ghalint run', 'actionlint'],
   },
   // @keep-sorted
   fmt: {
