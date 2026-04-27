@@ -1,49 +1,76 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import './layer-order.css';
+@import 'kiso.css' layer(kiso-reset);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:where(:root) {
+  /* ----------------------------------------
+    Theme: Rose Pine
+    https://rosepinetheme.com/
+  ---------------------------------------- */
+  /* colors */
+  --colors-base: light-dark(#faf4ed, #232136);
+  --colors-surface: light-dark(#fffaf3, #2a273f);
+  --colors-overlay: light-dark(#f2e9e1, #393552);
+  --colors-muted: light-dark(#9893a5, #6e6a86);
+  --colors-subtle: light-dark(#797593, #908caa);
+  --colors-text: light-dark(#575279, #e0def4);
+  --colors-love: light-dark(#b4637a, #eb6f92);
+  --colors-gold: light-dark(#ea9d34, #f6c177);
+  --colors-rose: light-dark(#d7827e, #ea9a97);
+  --colors-pine: light-dark(#286983, #3e8fb0);
+  --colors-foam: light-dark(#56949f, #9ccfd8);
+  --colors-iris: light-dark(#907aa9, #c4a7e7);
+  --colors-highlight-low: light-dark(#f4ede8, #2a283e);
+  --colors-highlight-med: light-dark(#dfdad9, #44415a);
+  --colors-highlight-high: light-dark(#cecacd, #56526e);
+  --colors-black: #000;
+  --colors-white: #fff;
+  --color-mix-base: light-dark(var(--colors-black), var(--colors-white));
+  --color-mix-ratio-light: 7%;
+  --color-mix-ratio-dark: 12%;
+  --color-mix-ratio: var(--color-mix-ratio-light);
+
+  /* font-sizes */
+  --font-sizes-xs: 0.75rem;
+  --font-sizes-sm: 0.875rem;
+  --font-sizes-md: 1rem;
+  --font-sizes-lg: 1.125rem;
+  --font-sizes-xl: 1.25rem;
+  --font-sizes-2xl: 1.5rem;
+  --font-sizes-3xl: 1.875rem;
+  --font-sizes-4xl: 2.25rem;
+  --font-sizes-5xl: 3rem;
+  --font-sizes-6xl: 4rem;
+  --font-sizes-7xl: 5rem;
+  --font-sizes-8xl: 6rem;
+
+  /* spacing */
+  --to-rem: calc(1 / 16 * 1rem);
+
+  &[data-theme='light'] {
+    color-scheme: light;
+    --color-mix-ratio: var(--color-mix-ratio-light);
   }
-}
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
+  &[data-theme='dark'] {
     color-scheme: dark;
+    --color-mix-ratio: var(--color-mix-ratio-dark);
+  }
+
+  &[data-theme='system'] {
+    color-scheme: light dark;
+    --color-mix-ratio: var(--color-mix-ratio-light);
+    @media (prefers-color-scheme: dark) {
+      --color-mix-ratio: var(--color-mix-ratio-dark);
+    }
+  }
+
+  color: var(--colors-text);
+  background-color: var(--colors-base);
+}
+
+body {
+  @media (width < 375px) {
+    zoom: progress(100lvw, 0px, 375px);
+    -webkit-text-size-adjust: initial;
   }
 }

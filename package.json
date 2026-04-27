@@ -9,9 +9,10 @@
     "lint:markup": "markuplint \"src/**/*.{html,jsx,tsx}\" --fix --problem-only",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
-    "prepare": "vp config"
+    "prepare": "vp config && panda codegen"
   },
   "dependencies": {
+    "kiso.css": "^1.2.4",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -20,6 +21,7 @@
     "@chromatic-com/storybook": "^5.1.2",
     "@markuplint/jsx-parser": "5.0.0-rc.4",
     "@markuplint/react-spec": "5.0.0-rc.4",
+    "@pandacss/dev": "^1.10.0",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-mcp": "^0.6.0",
