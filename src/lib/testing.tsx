@@ -44,30 +44,31 @@ export function getProps<
     return element.props;
   }
   // oxlint-disable-next-line typescript/no-unsafe-argument
-  const foundProps = Object.values(element.props).reduce((acc: object[], prop) => {
-    if (!isElement(prop)) return acc;
+  for (const prop of Object.values(element.props)) {
+    if (!isElement(prop)) continue;
     // oxlint-disable-next-line typescript/no-unsafe-assignment
-    const hit = getProps(prop, componentType);
-    if (!hit) return acc;
+    const hit = getProps<T>(prop, componentType);
     // oxlint-disable-next-line typescript/no-unsafe-return
-    return [...acc, hit];
-  }, []);
-  // oxlint-disable-next-line typescript/no-unsafe-return
-  return foundProps[0];
+    if (hit) return hit;
+  }
+  return undefined;
 }
 
 if (import.meta.vitest) {
   const { it, expect, describe } = import.meta.vitest;
 
   // Test components
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
   function TestChild({ message }: { message: string }) {
     return <div>{message}</div>;
   }
 
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
   function TestParent({ children }: { children: JSX.Element }) {
     return <div>{children}</div>;
   }
 
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
   function TestNested({ id, child }: { id: string; child: JSX.Element }) {
     return (
       <div data-id={id}>
