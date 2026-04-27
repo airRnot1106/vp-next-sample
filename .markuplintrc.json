@@ -1,0 +1,16 @@
+{
+  "specs": {
+    "\\.[jt]sx?$": "@markuplint/react-spec"
+  },
+  "parser": {
+    "\\.[jt]sx?$": "@markuplint/jsx-parser"
+  },
+  "extends": ["markuplint:recommended"],
+  "pretenders": {
+    "scan": [
+      {
+        "files": "./src/**/!(*stories).tsx"
+      }
+    ]
+  }
+}

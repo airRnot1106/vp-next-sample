@@ -11,6 +11,7 @@ const dirname =
 export default defineConfig({
   staged: {
     '*': 'vp check --fix',
+    '*.{html,jsx,tsx}': 'vp run lint:markup',
   },
   // @keep-sorted
   fmt: {

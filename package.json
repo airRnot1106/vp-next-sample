@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint:markup": "markuplint \"src/**/*.{html,jsx,tsx}\" --fix --problem-only",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "prepare": "vp config"
@@ -17,6 +18,8 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
+    "@markuplint/jsx-parser": "5.0.0-rc.4",
+    "@markuplint/react-spec": "5.0.0-rc.4",
     "@storybook/addon-a11y": "^10.3.5",
     "@storybook/addon-docs": "^10.3.5",
     "@storybook/addon-mcp": "^0.6.0",
@@ -31,6 +34,7 @@
     "eslint-config-next": "16.2.4",
     "eslint-plugin-command": "^3.5.2",
     "eslint-plugin-storybook": "^10.3.5",
+    "markuplint": "5.0.0-rc.4",
     "msw": "^2.13.5",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
