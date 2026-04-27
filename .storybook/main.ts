@@ -1,5 +1,6 @@
 import { defineMain } from '@storybook/nextjs-vite/node';
 
+// @keep-sorted
 export default defineMain({
   addons: [
     '@chromatic-com/storybook',
@@ -7,6 +8,7 @@ export default defineMain({
     '@storybook/addon-a11y',
     '@storybook/addon-docs',
     '@storybook/addon-mcp',
+    '@storybook/addon-themes',
   ],
   features: {
     experimentalRSC: true,
