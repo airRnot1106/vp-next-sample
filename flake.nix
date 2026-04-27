@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    skills = {
+      url = "path:./nix/skills";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     vp-nix = {
       url = "github:naitokosuke/vp-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +14,7 @@
   outputs =
     {
       nixpkgs,
+      skills,
       vp-nix,
       ...
     }:
@@ -30,6 +35,7 @@
         in
         {
           default = pkgs.mkShell {
+            inputsFrom = [ skills.devShells.${system}.default ];
             packages = (
               with pkgs;
               [

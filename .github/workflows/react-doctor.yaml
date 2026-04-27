@@ -1,0 +1,29 @@
+name: React Doctor
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  react-doctor:
+    name: React Doctor
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0 # required for --diff
+          persist-credentials: false
+
+      - uses: millionco/react-doctor@f1bd77645c91a65a5cc79b0ec93b44e80e54ca3c # v0.0.37
+        with:
+          diff: ${{ github.base_ref }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

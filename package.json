@@ -52,5 +52,12 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "reactDoctor": {
+    "diff": true,
+    "failOn": "warning",
+    "files": [
+      "src/**"
+    ]
   }
 }
