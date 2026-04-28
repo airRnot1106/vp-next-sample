@@ -73,6 +73,7 @@
           allowlist = agentLib.allowlistFor {
             inherit catalog sources;
             enable = [
+              "byethrow"
               "composition-patterns"
               "frontend-design"
               "next-bundle-analyzer"
