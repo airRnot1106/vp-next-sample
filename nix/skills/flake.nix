@@ -8,6 +8,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    functional-ts-principles = {
+      url = "github:iwasa-kosui/functional-ts-principles";
+      flake = false;
+    };
     mizchi = {
       url = "github:mizchi/skills";
       flake = false;
@@ -27,6 +31,7 @@
     {
       agent-skills,
       anthropic-skills,
+      functional-ts-principles,
       mizchi,
       nixpkgs,
       react-doctor,
@@ -57,6 +62,10 @@
               path = anthropic-skills;
               subdir = "skills";
             };
+            functional-ts-principles = {
+              path = functional-ts-principles;
+              subdir = "skills";
+            };
             mizchi = {
               path = mizchi;
             };
@@ -76,6 +85,8 @@
               "byethrow"
               "composition-patterns"
               "frontend-design"
+              "functional-ts"
+              "functional-ts-review"
               "next-bundle-analyzer"
               "playwright-cli"
               "playwright-test"

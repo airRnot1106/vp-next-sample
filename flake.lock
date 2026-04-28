@@ -38,6 +38,22 @@
         "type": "github"
       }
     },
+    "functional-ts-principles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775661380,
+        "narHash": "sha256-pBIvzmwg6elW6OoIEn1oa6gQy7b/opjvTtBDFMAUO9Y=",
+        "owner": "iwasa-kosui",
+        "repo": "functional-ts-principles",
+        "rev": "3a19099c7b0818219d5c16d4f4b38a6e77d6830b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "iwasa-kosui",
+        "repo": "functional-ts-principles",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -140,6 +156,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "anthropic-skills": "anthropic-skills",
+        "functional-ts-principles": "functional-ts-principles",
         "mizchi": "mizchi",
         "nixpkgs": [
           "nixpkgs"
