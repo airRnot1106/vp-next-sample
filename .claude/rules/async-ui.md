@@ -25,12 +25,15 @@ Suspense / Transition を中心にした非同期 UI の設計原則を扱う。
 </>
 ```
 
-## 3. `useTransition` を活用する
+## 3. トランジションを活用する
 
 状態切替に伴ってサスペンドが起きるとき、`startTransition` でトランジション化すると **古い UI が保たれたまま新しい UI を待つ**ことができる（fallback には切り替わらない）。
 
+**基本は `react` から `startTransition` を直接 import して使う**。`useTransition` は `isPending` が必要なときに限定する。
+
 ```tsx
-const [isPending, startTransition] = useTransition();
+import { startTransition } from 'react';
+
 const [userId, setUserId] = useState('user1');
 
 const handleSelect = (id: string) => {
@@ -40,19 +43,37 @@ const handleSelect = (id: string) => {
 };
 ```
 
-- `isPending` で「処理中」を示すサブ表示（"(読み込み中...)" / 半透明化 / スピナー）を出す。fallback とは別の、現在の UI に対する**プラスアルファ**として表現する。
+- 単体 `startTransition` は hook ではないため、関数コンポーネント外（`useEffect` / `useLayoutEffect` のクリーンアップ、外部イベントリスナー等）でも使える。
+- `<form action>` / `<button formAction>` は React が自動でトランジション化するが、`<button onClick>` から Server Action を起動する場合は `onClick={() => startTransition(action)}` のように手動で包む必要がある。
+
+### 3.1 `isPending` が欲しいときだけ `useTransition`
+
+「処理中」のサブ表示（"(読み込み中...)" / 半透明化 / スピナー）を出したいときに限って `useTransition` を使う。fallback とは別の、現在の UI に対する**プラスアルファ**として表現する。
+
+```tsx
+const [isPending, startTransition] = useTransition();
+
+const handleSelect = (id: string) => {
+  startTransition(() => {
+    setUserId(id);
+  });
+};
+```
+
 - これにより `古い UI → fallback → 新しい UI` ではなく `古い UI → 新しい UI` の流れになり、ちらつきがなくなる。
+- pending 表示が要らないなら §3 冒頭のスタンドアロン版を使う。`useTransition` を「念のため」付けない。
+- Server Action と組み合わせる場合は `useActionState` の `pending` で済むことも多い。
 
 ## 4. 複数トランジションは独立に持つ
 
-ユーザー切替・カテゴリ切替など UI の異なる領域に影響する更新がある場合、`useTransition` は **領域ごとに独立**して持つ。
+ユーザー切替・カテゴリ切替など UI の異なる領域に影響する更新があり、各領域で `isPending` を出したい場合、`useTransition` は **領域ごとに独立**して持つ。
 
 ```tsx
 const [isPendingUser, startTransitionUser] = useTransition();
 const [isPendingPost, startTransitionPost] = useTransition();
 ```
 
-ひとつの `isPending` を共用すると、ユーザーを切り替えただけで投稿一覧側にも「(読み込み中...)」が出てしまい、ユーザーに誤った情報を与える。
+ひとつの `isPending` を共用すると、ユーザーを切り替えただけで投稿一覧側にも「(読み込み中...)」が出てしまい、ユーザーに誤った情報を与える。pending 表示が不要な領域はスタンドアロン `startTransition` で済ませてよい。
 
 ## 5. 制御コンポーネントは非トランジション
 
@@ -91,6 +112,7 @@ Next.js では `<Suspense>` は Streaming SSR の単位でもある。同じ境�
 - ❌ `useEffect` で fetch して `useState` でデータと `isLoading` を管理する
 - ❌ ページ全体を 1 つの `<Suspense>` で包む
 - ❌ ひとつの `useTransition` を複数の独立した状態更新で共用する
+- ❌ `isPending` を使わないのに `useTransition` でフックを増やす（スタンドアロン `startTransition` で十分）
 - ❌ `<input>` の `onChange` を `startTransition` で囲む
 - ❌ React Compiler 前提なのに `useMemo` / `useCallback` を予防的に入れる
 
