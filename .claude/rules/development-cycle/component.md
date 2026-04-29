@@ -144,7 +144,8 @@
 2. [skill: `/web-design-guidelines`] — アクセシビリティ・UI ガイドライン
 3. [skill: `/react-best-practices`] — パフォーマンス（React Compiler 前提のため不要な `useMemo` / `useCallback` を入れていないか）
 4. [skill: `/composition-patterns`] — boolean prop の肥大化や reuse の機会があれば
-5. **スタイリング規約（[`../styling.md`](../styling.md)）の自己点検**:
+5. [skill: `/next-bundle-analyzer`] — バンドルサイズ・重複モジュール・大型依存の検出（`vp run analyze:output` を起点）。**コンポーネント単位で毎回回さず、複数追加後やページ完成時にまとめて実行する**。Client Components を新規追加した場合・3rd party ライブラリを新規 import した場合は実行を強く推奨
+6. **スタイリング規約（[`../styling.md`](../styling.md)）の自己点検**:
    - コンポーネントルートと Layout エレメントが分離されているか（§4.1）
    - Props が `ComponentPropsWithoutClassName<T>` で定義され、子に `className` を渡している箇所がないか（§4.4〜§4.5）
    - 親→子のスタイル制御が CSS Custom Property API で行われているか（§4.7）
@@ -162,6 +163,7 @@
 - `vp check`（lint + format + 型）が通る
 - `/react-doctor` の指摘が解消されている
 - `/web-design-guidelines` の指摘が解消されている
+- `/next-bundle-analyzer` を実行する条件（複数コンポーネント追加 / ページ完成 / Client Components 新規追加 / 3rd party ライブラリ新規 import）に該当する場合は実行済みで、検出された大型依存・重複モジュールの判断（許容 or 対処）を済ませている
 - [`../styling.md`](../styling.md) 規約の自己点検にヒットなし
 
 `vp` コマンドの詳細は `AGENTS.md` を参照する。
@@ -199,5 +201,6 @@
 - [skill: `/web-design-guidelines`] — Step 6 のレビュー
 - [skill: `/react-doctor`] — Step 6 のレビュー
 - [skill: `/react-best-practices`] — Step 6 のパフォーマンスレビュー
+- [skill: `/next-bundle-analyzer`] — Step 6 のバンドルサイズレビュー（複数コンポーネント追加 / ページ完成タイミング）
 - [skill: `/composition-patterns`] — リファクタ時の参照
 - [skill: `/javascript-testing-expert`] — Step 5.1 の Vitest 詳細
