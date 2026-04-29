@@ -94,3 +94,45 @@ For GitHub Actions, consider using [`voidzero-dev/setup-vp`](https://github.com/
 - [ ] Run `vp install` after pulling remote changes and before getting started.
 - [ ] Run `vp check` and `vp test` to validate changes.
 <!--VITE PLUS END-->
+
+## Project Scripts
+
+Vite+ ブロック既出のコマンド（`vp dev` / `vp build` / `vp test` / `vp check` / `vp lint` / `vp fmt` 等）に加え、`package.json` の scripts として以下を `vp run <script>` で叩ける：
+
+- `vp run analyze` / `vp run analyze:output` — Next.js バンドル分析（Turbopack）。`/next-bundle-analyzer` skill が起点とする
+- `vp run lint:markup` — Markuplint による JSX/TSX/HTML マークアップチェック（`--fix` 対応）
+- `vp run storybook` — Storybook dev サーバ（port 6006）
+- `vp run build-storybook` — Storybook ビルド
+- `vp run test:e2e` / `vp run test:e2e:ui` — Playwright E2E
+- `vp run prepare` — `vp config && panda codegen`（依存導入後の自動実行）
+
+### 単一テスト / in-source test の走らせ方
+
+- 単一ファイル: `vp test <path/to/file>`（例: `vp test src/features/user/_base/models/user-id.ts`）
+- 単一テスト名フィルタ: `vp test -- -t "<test name>"`
+- in-source test（`if (import.meta.vitest)` ブロック）は `vp test` で通常テストと一緒に走る。`vite.config.ts` の `includeSource: ['src/**/*.{ts,tsx}']` で有効化済み
+
+## Architecture
+
+複数ファイルを読まないと掴めない big picture：
+
+- **Next.js + React + React Compiler** — `babel-plugin-react-compiler` / `eslint-plugin-react-compiler` 導入済み。`useMemo` / `useCallback` を予防的に入れない
+- **Cache Components**（PPR / Dynamic IO / `"use cache"`）前提。動的 I/O は必ず `<Suspense>` 内側に置く
+- **Vite+ 統合 testing** — `vite.config.ts` 1 ファイルで複数プロジェクト構成（in-source `*.{ts,tsx}` ＋ `*.test.{ts,tsx}` ＋ Storybook addon-vitest）
+- **MSW** — `mocks/handlers.ts` / `mocks/browser.ts` / `mocks/server.ts` で SSR / CSR 両対応。`src/lib/msw/` の Provider 経由で起動
+- **Panda CSS** — `panda.config.ts` + `styled-system/`（自動生成）。生 CSS / Tailwind / styled-components / 文字列クラス直書きは禁止。`@/` エイリアス禁止、相対パスで import
+- **ドメイン層** — valibot brand 型 + `@praha/byethrow` Result 型 + Discriminated Union + Companion Object パターン。throw 禁止、`as` 禁止、`interface` 禁止
+- **UseCase / Repository 層は持たない**（フロントエンド前提）
+
+## Where to look
+
+詳細ルールは `.claude/rules/` に集約されている。本ファイルでは再掲せず、入口だけ示す：
+
+- 配置・命名: [`./.claude/rules/directory-structure.md`](./.claude/rules/directory-structure.md) + [`./.claude/rules/naming.md`](./.claude/rules/naming.md)（BCD Design: Base / Case / Domain）
+- 開発サイクル: [`./.claude/rules/development-cycle/feature.md`](./.claude/rules/development-cycle/feature.md)（機能 = ユーザーストーリー追加 8 ステップ、上位サイクル）/ [`./.claude/rules/development-cycle/component.md`](./.claude/rules/development-cycle/component.md)（コンポーネント追加 6 ステップ）/ [`./.claude/rules/development-cycle/domain-logic.md`](./.claude/rules/development-cycle/domain-logic.md)（ドメインロジック追加 5 ステップ）
+- Server / Client 境界 + Composition: [`./.claude/rules/server-client-boundary.md`](./.claude/rules/server-client-boundary.md)
+- データフェッチ: [`./.claude/rules/data-fetching.md`](./.claude/rules/data-fetching.md)（Server Components 集中、コロケーション、Request Memoization）
+- Cache Components: [`./.claude/rules/caching-and-rendering.md`](./.claude/rules/caching-and-rendering.md)（`"use cache"` / `cacheLife` / `cacheTag` / `revalidateTag`）
+- 非同期 UI: [`./.claude/rules/async-ui.md`](./.claude/rules/async-ui.md)（Suspense 境界、`startTransition` 単体が基本）
+- エラー: [`./.claude/rules/error-handling.md`](./.claude/rules/error-handling.md)（Server Action は throw せず Result を戻す）
+- スタイリング: [`./.claude/rules/styling.md`](./.claude/rules/styling.md)（Panda CSS、文字依存/非依存で単位を切る、container query 優先）
