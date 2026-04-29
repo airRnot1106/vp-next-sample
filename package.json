@@ -55,6 +55,7 @@
     "eslint-plugin-react-you-might-not-need-an-effect": "^0.9.3",
     "eslint-plugin-security": "^4.0.0",
     "eslint-plugin-storybook": "^10.3.5",
+    "fast-check": "^4.7.0",
     "markuplint": "5.0.0-rc.4",
     "msw": "^2.13.5",
     "playwright": "^1.59.1",

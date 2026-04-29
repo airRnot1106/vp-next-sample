@@ -8,6 +8,10 @@
       url = "github:anthropics/skills";
       flake = false;
     };
+    fast-check = {
+      url = "github:dubzzz/fast-check";
+      flake = false;
+    };
     functional-ts-principles = {
       url = "github:iwasa-kosui/functional-ts-principles";
       flake = false;
@@ -31,6 +35,7 @@
     {
       agent-skills,
       anthropic-skills,
+      fast-check,
       functional-ts-principles,
       mizchi,
       nixpkgs,
@@ -62,6 +67,10 @@
               path = anthropic-skills;
               subdir = "skills";
             };
+            fast-check = {
+              path = fast-check;
+              subdir = "skills";
+            };
             functional-ts-principles = {
               path = functional-ts-principles;
               subdir = "skills";
@@ -87,6 +96,7 @@
               "frontend-design"
               "functional-ts"
               "functional-ts-review"
+              "javascript-testing-expert"
               "next-bundle-analyzer"
               "playwright-cli"
               "playwright-test"
