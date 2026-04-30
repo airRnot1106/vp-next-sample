@@ -119,7 +119,7 @@ src/features/
 - ドメインに属さない汎用 React hook を置く（例: `useDebounce`、`useMediaQuery`）。
 - ドメイン依存の hook は `features/<domain>/hooks/` に置く。
 - React API を伴わない純粋なドメインロジックを hook にしてはならない。そのようなロジックは `features/<domain>/models/` に置く。
-  以下の規則は `src/hooks/` および `features/<domain>/_base/hooks/`・`features/<domain>/_base/models/` のすべてに適用される。
+  以下の規則は `src/hooks/` および `features/<domain>/**/hooks/`・`features/<domain>/**/models/` のすべてに適用される。
 
 - `hooks/` および `models/` 配下は**ファイル直置き**とする（例: `use-debounce.ts`, `user-id.ts`）。ディレクトリ化（`use-debounce/index.ts`）はしない。
 - 直置きファイルのテストは **Vitest の in-source test** で行う（`if (import.meta.vitest)` ブロック）。`.test.ts` ファイルは作らない。

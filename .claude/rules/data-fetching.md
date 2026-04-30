@@ -20,7 +20,7 @@ App Router におけるデータフェッチの設計原則を定める。配置
 
 Request Memoization は **同一 URL・同一オプション**であることが前提条件である。これを保証するため、fetcher は分散させずドメインごとに 1 箇所に集約する。
 
-- 配置: `features/<domain>/_base/api/`（[`./directory-structure.md`](./directory-structure.md) 参照）
+- 配置: `features/<domain>/**/api/`（[`./directory-structure.md`](./directory-structure.md) 参照）
 - すべての fetcher の先頭で `import "server-only"` を宣言し、誤って Client Bundle に混入することを防ぐ。
 - Server Components / Server Actions / Container Components から fetcher を呼ぶ。Client Components が直接 fetcher を import してはならない。
 - 同じリソースに対する fetch は必ず同じ関数を経由させる。`getUser(id)` を A コンポーネントと B コンポーネントから呼ぶときに、片方が独自の `fetch()` を書くと Memoization が効かなくなる。

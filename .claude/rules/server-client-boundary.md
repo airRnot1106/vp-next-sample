@@ -135,7 +135,7 @@ export default async function Page(props: { params: Promise<{ postId: string }> 
 | `server-only` | DB クライアント、API キーを使うフェッチ層、暗号鍵を扱う関数など          |
 | `client-only` | `window` / `document` 直接アクセス、ブラウザストレージ、Web API ラッパー |
 
-`features/<domain>/_base/api/` 配下の fetcher はすべて先頭に `import "server-only"` を入れる。
+`features/<domain>/**/api/` 配下の fetcher はすべて先頭に `import "server-only"` を入れる。
 
 ## 9. ファイル単位 `"use server"` の罠
 

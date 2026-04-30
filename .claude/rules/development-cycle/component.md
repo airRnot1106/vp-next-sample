@@ -46,8 +46,8 @@
 
 [`../directory-structure.md`](../directory-structure.md) の規約に従って配置先ディレクトリを決める。再掲はしないが、要点だけ示す。
 
-- **Base** → `src/components/<base>/_base/`（バリアントは `_base/_variant/<variant>/`）
-- **Case** → `src/components/<case>/`
+- **Base** → `src/components/<base>/_base/`（例: `src/components/button/_base/`。バリアントは `_base/_variant/<variant>/`）
+- **Case** → `src/components/<base>/<case-base>`（例: `src/components/button/add-button/`）
 - **Domain** → `src/features/<domain>/<…>/components/<name>/`
 - 各コンポーネントディレクトリ直下に `index.ts` を置き、当該コンポーネントを export する。Container / Presentational に分割した場合は両方を export する。
 - 既存ディレクトリに後付けする場合は、既存ファイルの粒度・命名と揃えてから新ファイルを置く。
