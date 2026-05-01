@@ -2,7 +2,7 @@
 
 新しいドメインロジックを追加するときの作業順序を定める。本ルールは「**何をどこに置くか**」（[`../directory-structure.md`](../directory-structure.md)）「**どう名付けるか**」（[`../naming.md`](../naming.md)）「**どう失敗を表すか**」（[`../error-handling.md`](../error-handling.md)）といった既存の静的規約を、**どの順序で適用するか**を示す動的な作業フローを定義する。
 
-**射程**: `src/features/<domain>/**/models/` 配下に置かれる純粋なドメイン層に限定する。`_base/models/` だけでなくバリアントドメイン（例: `premium-user/models/`）や派生ドメイン（例: `user-detail/_base/models/`）配下の `models/` も含む。Server Action や fetcher、UI 連携は本サイクルの対象外であり、別の開発サイクルルールで扱う。
+**射程**: `src/features/<domain>/**/models/` 配下に置かれる純粋なドメイン層に限定する。後方一致 variant が兄弟に存在するときの `_base/models/`、バリアントドメイン（例: `premium-user/models/`）、派生ドメイン側 feature の `models/`（例: `user-detail/models/`）配下のいずれも含む。Server Action や fetcher、UI 連携は本サイクルの対象外であり、別の開発サイクルルールで扱う。
 
 なお、本プロジェクトはフロントエンドであり **UseCase 層・Repository 層は持たない**。`/functional-ts` スキルが触れる UseCase / Repository に関する記述は本プロジェクトでは適用範囲外として扱う。
 
@@ -31,10 +31,11 @@
 
 - [`../naming.md`](../naming.md) の**明名フロー**を必ず先に通す。「日本語で丁寧に説明する → 概念に分解する → 語順を保って英訳する → 英語名と日本語名を並べて読み返す」の手順を飛ばさない。
 - 名前から features ディレクトリを決める。後方一致 / 前方一致 / 隠れドメインの判定軸は [`../naming.md`](../naming.md) §6・§8 と [`../directory-structure.md`](../directory-structure.md) を参照する。
-- 配置先は次のとおり、すべて `models/` ディレクトリに**ファイル直置き**する。
-  - 修飾子のないドメイン本体 → `src/features/<domain>/_base/models/`
+- 配置先は次のとおり、すべて `models/` ディレクトリに**ファイル直置き**する。`_base/` の有無は [`../directory-structure.md`](../directory-structure.md) の規定（後方一致 variant が兄弟に存在するときに限り `_base/` を設ける）に従う。
+  - 修飾子のないドメイン本体（後方一致 variant が**兄弟に存在する**）→ `src/features/<domain>/_base/models/`
+  - 修飾子のないドメイン本体（後方一致 variant が**無い**）→ `src/features/<domain>/models/`
   - バリアントドメイン（後方一致）→ `src/features/<domain>/<variant>/models/`（例: `premium-user/models/`）
-  - 派生ドメイン（前方一致）→ 独立 feature の `_base/models/`（例: `user-detail/_base/models/`）
+  - 派生ドメイン（前方一致）→ 独立 feature の `models/`（例: `user-detail/models/`）。派生 feature 側に後方一致 variant が存在する場合は `user-detail/_base/models/` に隔離する
 - ディレクトリが存在しない場合のみ新規作成する。既存ドメインに後付けする場合は、既存ファイルの粒度・命名と揃えてから新ファイルを置く。
 - **1 ファイル 1 概念**: Entity と Entity が依存する ValueObject はそれぞれ独立した概念として、同じ `models/` ディレクトリに**別ファイル**で置く。例: `order.ts`（Entity）/ `order-id.ts` / `order-item.ts`（依存 ValueObject）。同一ファイルに同居させない。
 - **サイクルの射程**: Entity 追加が起点のサイクルでは、依存する ValueObject の新規追加も**同一サイクルの一部**として進める（明名・配置・型設計・TDD を Entity と並行して行う）。Entity ファイルだけを単独で完成させない。

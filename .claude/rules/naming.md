@@ -86,7 +86,7 @@ Base 内では atoms / molecules といった粒度で整理してよいが、**
 
 Domain 構成要素を含む名前は必ず `features/<domain>/` 配下に置かれる。逆に `components/` 配下に置く Base / Case はドメイン名を含めてはならない（含めるならそれは `features/` 配下の Domain）。
 
-複合ドメイン名（パターン E）は **独立した feature の存在を示唆する**。例えば `UserNameTextBox` は `user/` ドメイン配下ではなく、`user-name`（§6 前方一致の派生）という独立 feature の Domain として `features/user-name/_base/components/` に置く。命名パターンは E のままで、**配置のみ** `user-name` feature 配下になる点に注意。
+複合ドメイン名（パターン E）は **独立した feature の存在を示唆する**。例えば `UserNameTextBox` は `user/` ドメイン配下ではなく、`user-name`（§6 前方一致の派生）という独立 feature の Domain として `features/user-name/components/` に置く（後方一致 variant が兄弟に存在しない場合。存在する場合は `_base/components/` に隔離する。詳細は [`./directory-structure.md`](./directory-structure.md)）。命名パターンは E のままで、**配置のみ** `user-name` feature 配下になる点に注意。
 
 ### 4.2 末尾 UI 名の規定リスト
 
@@ -118,7 +118,7 @@ Domain 構成要素を含む名前は必ず `features/<domain>/` 配下に置か
 - **前置する**: コンポーネント名がインポート文・Storybook タイトル・レビュー指摘などで配置先文脈なしに読まれる場面が想定されるとき。デフォルトはこちら。
 - **省略する**: 当該ドメイン配下に閉じた小さな部品で、外部から参照されない、または対称性のための短縮が必要なとき。
 
-`features/user/_base/components/` 配下でも、`UserDeleteButton` のようにドメイン名を残すのが原則。`DeleteButton` まで縮めると `features/article/_base/components/delete-button` と `features/user/_base/components/delete-button` が import 文上で区別できない（§9 アンチパターン「形式が似ているだけでまとめる」と同じリスク）。
+`features/user/components/` 配下でも、`UserDeleteButton` のようにドメイン名を残すのが原則（後方一致 variant がある場合は `_base/components/`）。`DeleteButton` まで縮めると `features/article/components/delete-button` と `features/user/components/delete-button` が import 文上で区別できない（§9 アンチパターン「形式が似ているだけでまとめる」と同じリスク）。
 
 ## 5. 対称性とスケーラビリティ
 

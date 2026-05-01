@@ -46,7 +46,7 @@
 
 [`../directory-structure.md`](../directory-structure.md) の規約に従って配置先ディレクトリを決める。再掲はしないが、要点だけ示す。
 
-- **Base** → `src/components/<base>/_base/`（例: `src/components/button/_base/`。バリアントは `_base/_variant/<variant>/`）
+- **Base** → `src/components/<base>/`。Case が兄弟に存在しないなら Base 本体は `<base>/<base>.tsx` のように直置きする（例: `src/components/divider/divider.tsx`）。Case が兄弟に存在するときに限り Base 本体を `_base/` に隔離する（例: `src/components/button/_base/button.tsx`）。variant は Base 本体と同じ階層に `_variant/<variant>/` として置く（[`../directory-structure.md`](../directory-structure.md) の `_base/` / `_variant/` 規定を参照）
 - **Case** → `src/components/<base>/<case-base>`（例: `src/components/button/add-button/`）
 - **Domain** → `src/features/<domain>/<…>/components/<name>/`
 - 各コンポーネントディレクトリ直下に `index.ts` を置き、当該コンポーネントを export する。Container / Presentational に分割した場合は両方を export する。
@@ -131,7 +131,7 @@
 ### 7.2 UI 主体（Presentational / Base / Case）は Storybook
 
 - `*.stories.tsx` を**同ディレクトリに置く**。
-- バリアント（`_base/_variant/` 配下なら各 variant）を Story として網羅する。
+- バリアント（`_variant/` 配下の各 variant）を Story として網羅する。
 - `@storybook/addon-vitest` による Component テストも組み合わせる。
 - `@storybook/addon-a11y` のチェックを通す。
 - `experimentalRSC: true` のため Server Components の Story も書ける。
