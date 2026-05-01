@@ -13,7 +13,7 @@
     "build-storybook": "storybook build",
     "test:e2e": "playwright test --pass-with-no-tests",
     "test:e2e:ui": "playwright test --ui --pass-with-no-tests",
-    "prepare": "vp config && panda codegen"
+    "prepare": "vp config && panda codegen && next typegen"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
